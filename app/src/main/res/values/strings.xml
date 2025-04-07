@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ProytectMine</string>
+    <string name="SearchViewText">SEARCH FOR A COCKTAIL</string>
+    <string name="FirstLetterButton">Search By First Letter</string>
+    <string name="IngredientButton">Search By Ingredient</string>
+    <string name="RandomButton">Random Cocktail</string>
+    <string name="FavoritesButton">Favorites</string>
+    <string name="FilterByGlassButton">Filter By Glass</string>
+
 </resources>

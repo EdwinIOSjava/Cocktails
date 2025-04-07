@@ -1,19 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <SearchView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/searchView"
+        android:queryHint="@string/SearchViewText"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="20dp"
+        android:backgroundTint="@color/buttonColor"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstLetterButton"
+        android:text="@string/FirstLetterButton"
+        android:backgroundTint="@color/buttonColor"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
+
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingredientButton"
+        android:text="@string/IngredientButton"
+        android:backgroundTint="@color/buttonColor"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
+
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/randomButton"
+        android:text="@string/RandomButton"
+        android:backgroundTint="@color/buttonColor"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
+
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/favoritesButton"
+        android:text="@string/FavoritesButton"
+        android:backgroundTint="@color/buttonColor"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
+
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filterByGlassButton"
+        android:text="@string/FilterByGlassButton"
+        android:backgroundTint="@color/buttonColor"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
+
+        />
+
+
+
+
+</LinearLayout>
