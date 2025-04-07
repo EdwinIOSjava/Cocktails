@@ -6,5 +6,6 @@
     <string name="RandomButton">Random Cocktail</string>
     <string name="FavoritesButton">Favorites</string>
     <string name="FilterByGlassButton">Filter By Glass</string>
+    <string name="textRecyclerView">Top Cocktails: </string>
 
 </resources>
