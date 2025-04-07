@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
         supportActionBar?.title = "Cocktails"
 
-        adapter = CocktailAdapter(cocktailList) { position ->
+       /* adapter = CocktailAdapter(cocktailList) { position ->
             val cocktail = cocktailList[position]
 
             val intent = Intent(this, DetailActivity::class.java)
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-        searchCocktailsById("o")
+        searchCocktailsById("o")*/
 
     }
     // usamos retrofit para hacer la peticion a la API
