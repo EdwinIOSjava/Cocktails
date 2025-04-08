@@ -13,6 +13,7 @@ import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.Cocktail
 import com.example.proytectmine.data.CocktailResponse
 import com.example.proytectmine.data.CocktailService
+import com.example.proytectmine.data.Ingredients
 import com.example.proytectmine.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     // creamos una lista de superheroes vacia para poder llenarla con los resultados de la API
     var cocktailList: List<Cocktail> = listOf()
+    var ingredientsList: List<Ingredients> = listOf()
     var responseList: String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         supportActionBar?.title = "Cocktails"
+        searchCocktailsIngredients("553")
 
        /* adapter = CocktailAdapter(cocktailList) { position ->
             val cocktail = cocktailList[position]
@@ -73,21 +76,36 @@ class MainActivity : AppCompatActivity() {
 
 
     // usamos corrutinas para hacer la peticion a la API y mostrar los resultados en el RV
-    fun searchCocktailsById(query: String) {
+//    fun searchCocktailsById(query: String) {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try {
+//                val service = getRetrofit()
+//                val result = service.findCocktailIngredientsById(query)
+//
+//                responseList = result.response
+//
+//                CoroutineScope(Dispatchers.Main).launch {
+//                    Log.i("MainActivity", "Response: $responseList")
+////                    adapter.items = cocktailList
+////                    adapter.notifyDataSetChanged()
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
+    fun searchCocktailsIngredients(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                Log.i("Dentro del Corutine", "Response: Entro en el corutine")
+
                 val service = getRetrofit()
-                val result = service.findCocktailById(query)
-
-                responseList = result.response
-
-                CoroutineScope(Dispatchers.Main).launch {
-                    Log.i("MainActivity", "Response: $responseList")
-//                    adapter.items = cocktailList
-//                    adapter.notifyDataSetChanged()
-                }
+                val result = service.findCocktailIngredientsById(query)
+                ingredientsList = result.ingredients
+                Log.i("Retrofit Coroutine", "Response: $ingredientsList")
             } catch (e: Exception) {
                 e.printStackTrace()
+                Log.i("MainActivity", "Error: ${e.message}")
             }
         }
     }
