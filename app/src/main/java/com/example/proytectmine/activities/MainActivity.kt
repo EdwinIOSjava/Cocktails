@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proytectmine.R
 import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.CocktailResponse
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     var ingredientsList: List<Ingredients> = listOf()
     var drinkCaracteristics : List<Drink> = listOf()// aqui guardamos la respuesta de la API
+    var allsCocktailsByFirstLetter : List<Drink> = listOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,21 +47,22 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         supportActionBar?.title = "Cocktails"
-        searchCocktailByName("Whiskey Sour")
-        searchCocktailsIngredients("553")
 
-       /* adapter = CocktailAdapter(cocktailList) { position ->
-            val cocktail = cocktailList[position]
+//        searchCocktailByName("Whiskey Sour")
+//        searchCocktailsIngredients("553")
+        searchAllsCocktailsByFirstLetter("m")
+
+        adapter = CocktailAdapter(allsCocktailsByFirstLetter) { position ->
+
+            val cocktail = allsCocktailsByFirstLetter[position]
 
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("COCKTAIL_ID", cocktail.id)
+            intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
             startActivity(intent)
         }
 
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
-
-        searchCocktailsById("o")*/
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
     }
     // usamos retrofit para hacer la peticion a la API
@@ -101,11 +104,11 @@ class MainActivity : AppCompatActivity() {
             try {
                 val service = getRetrofit()
                 val result = service.findCocktailIngredientsById(query)
-                ingredientsList = result.ingredients
-                Log.i("Retrofit Coroutine", "Response: $ingredientsList")
+                //ingredientsList = result.ingredients
+                //Log.i("Retrofit Coroutine", "Response: $ingredientsList")
             } catch (e: Exception) {
                 e.printStackTrace()
-                Log.i("ErrorMainActivityIngredients", "Error: ${e.message}")
+                //Log.i("ErrorMainActivityIngredients", "Error: ${e.message}")
             }
         }
     }
@@ -120,6 +123,19 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
                 Log.i("ErrorMainActivityName", "Error: ${e.message}")
 
+            }
+        }
+    }
+    fun searchAllsCocktailsByFirstLetter(query: String){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val service = getRetrofit()
+                val result = service.findAllsCocktailsByFirstLetter(query)
+                allsCocktailsByFirstLetter = result.drinks
+                Log.i("MainActivity", "Response: $allsCocktailsByFirstLetter")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.i("ErrorMainActivityName", "Error: ${e.message}")
             }
         }
     }

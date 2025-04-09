@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName
 
 // en esta clase creamos el modelo de datos de la respuesta de la API
 data class CocktailResponse (
-    val drinks: List<Drink>,
-    val ingredients: List<Ingredients>
+    val drinks: List<Drink>,// search coctail by name
+    //val ingredients: List<Ingredients>,// search ingredient by name
 )
-data class Cocktail(
+/*data class Cocktail(
     val id: String,
     val nameCocktail: String
-)
+)*/
 
 data class Ingredients(
     val idIngredient: String,
@@ -23,6 +23,7 @@ data class Ingredients(
     val strAlcohol: String,
     val strABV: String?// esto puede ser null , toca manejar eso
 )
+
 data class Drink(
     val idDrink: String?,
     val strDrink: String?,
