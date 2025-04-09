@@ -3,6 +3,7 @@ package com.example.proytectmine.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -58,11 +59,12 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
+            //Toast.makeText(, "", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
 
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(this,2)
+        //binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         searchAllsCocktailsByFirstLetter("m")
     }
