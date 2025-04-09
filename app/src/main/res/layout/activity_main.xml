@@ -70,6 +70,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/recyclerView"/>
+        android:id="@+id/recyclerView"
+        android:orientation="vertical"/>
 
 </LinearLayout>

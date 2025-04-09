@@ -34,6 +34,8 @@ class CocktailAdapter (var items : List<Drink>, val onClick: (Int) -> Unit): Ada
 
 class CocktailViewHolder(val binding: ItemCocktailBinding) : RecyclerView.ViewHolder(binding.root) {
 
+    //Log.d("VariablestrImageSource", "Response:")
+
     fun render(cocktail: Drink) {
 
         binding.nameCocktailTextView.text = cocktail.strDrink

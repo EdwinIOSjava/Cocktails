@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 //        searchCocktailByName("Whiskey Sour")
 //        searchCocktailsIngredients("553")
-        searchAllsCocktailsByFirstLetter("m")
+
 
         adapter = CocktailAdapter(allsCocktailsByFirstLetter) { position ->
 
@@ -62,8 +62,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = GridLayoutManager(this,2)
 
+        searchAllsCocktailsByFirstLetter("m")
     }
     // usamos retrofit para hacer la peticion a la API
     fun getRetrofit(): CocktailService {
@@ -133,6 +134,12 @@ class MainActivity : AppCompatActivity() {
                 val result = service.findAllsCocktailsByFirstLetter(query)
                 allsCocktailsByFirstLetter = result.drinks
                 Log.i("MainActivity", "Response: $allsCocktailsByFirstLetter")
+
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    adapter.items = allsCocktailsByFirstLetter
+                    adapter.notifyDataSetChanged()
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.i("ErrorMainActivityName", "Error: ${e.message}")
