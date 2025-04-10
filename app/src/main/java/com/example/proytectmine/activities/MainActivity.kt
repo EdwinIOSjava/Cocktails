@@ -82,26 +82,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    // usamos corrutinas para hacer la peticion a la API y mostrar los resultados en el RV
-//    fun searchCocktailsById(query: String) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val service = getRetrofit()
-//                val result = service.findCocktailIngredientsById(query)
-//
-//                responseList = result.response
-//
-//                CoroutineScope(Dispatchers.Main).launch {
-//                    Log.i("MainActivity", "Response: $responseList")
-////                    adapter.items = cocktailList
-////                    adapter.notifyDataSetChanged()
-//                }
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//        }
-//    }
     fun searchCocktailsIngredients(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {

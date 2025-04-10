@@ -7,5 +7,10 @@
     <string name="FavoritesButton">Favorites</string>
     <string name="FilterByGlassButton">Filter By Glass</string>
     <string name="textRecyclerView">Top Cocktails: </string>
+    <string name="TitleMain">¿What do you prefer Today?</string>
+    <string name="SubtitleMain">Search By Ingredients,Name or Random Discover</string>
+    <string name="CocktailName">Cocktail Name</string>
+    <string name="Ingredients">Ingredients : </string>
+    <string name="Instruccions">"Instruccions : "</string>
 
 </resources>
