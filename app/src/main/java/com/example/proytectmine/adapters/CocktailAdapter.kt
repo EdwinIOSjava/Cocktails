@@ -39,8 +39,8 @@ class CocktailViewHolder(val binding: ItemCocktailBinding) : RecyclerView.ViewHo
     fun render(cocktail: Drink) {
 
         binding.nameCocktailTextView.text = cocktail.strDrink
-        Log.d("VariablestrImageSource", "Response: ${cocktail.strImageSource}")
-        Log.d("VariableCocktailImageView", "Response: ${cocktail.strImageSource}")
+//        Log.d("VariablestrImageSource", "Response: ${cocktail.strImageSource}")
+//        Log.d("VariableCocktailImageView", "Response: ${cocktail.strImageSource}")
 
         Picasso.get()
         .load(cocktail.strDrinkThumb)

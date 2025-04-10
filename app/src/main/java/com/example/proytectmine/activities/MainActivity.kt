@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
-            //Toast.makeText(, "", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
 
@@ -82,40 +82,40 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun searchCocktailsIngredients(query: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val service = getRetrofit()
-                val result = service.findCocktailIngredientsById(query)
-                //ingredientsList = result.ingredients
-                //Log.i("Retrofit Coroutine", "Response: $ingredientsList")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                //Log.i("ErrorMainActivityIngredients", "Error: ${e.message}")
-            }
-        }
-    }
-    fun searchCocktailByName(query: String){
-        CoroutineScope(Dispatchers.IO).launch {
-            try{
-                val service =getRetrofit()
-                val result=service.findCocktailByName(query)
-                drinkCaracteristics = result.drinks
-                Log.i("MainActivity","Response: $drinkCaracteristics")
-            }catch (e: Exception){
-                e.printStackTrace()
-                Log.i("ErrorMainActivityName", "Error: ${e.message}")
-
-            }
-        }
-    }
+//    fun searchCocktailsIngredients(query: String) {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try {
+//                val service = getRetrofit()
+//                val result = service.findCocktailIngredientsById(query)
+//                //ingredientsList = result.ingredients
+//                //Log.i("Retrofit Coroutine", "Response: $ingredientsList")
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                Log.i("ErrorMainActivityIngredients", "Error: ${e.message}")
+//            }
+//        }
+//    }
+//    fun searchCocktailByName(query: String){
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try{
+//                val service =getRetrofit()
+//                val result=service.findCocktailByName(query)
+//                drinkCaracteristics = result.drinks
+//                //Log.i("MainActivity","Response: $drinkCaracteristics")
+//            }catch (e: Exception){
+//                e.printStackTrace()
+//                Log.i("ErrorMainActivityName", "Error: ${e.message}")
+//
+//            }
+//        }
+//    }
     fun searchAllsCocktailsByFirstLetter(query: String){
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val service = getRetrofit()
                 val result = service.findAllsCocktailsByFirstLetter(query)
                 allsCocktailsByFirstLetter = result.drinks
-                Log.i("MainActivity", "Response: $allsCocktailsByFirstLetter")
+                //Log.i("CocktailsByLetter Hilo secundario", "Response: $allsCocktailsByFirstLetter")
 
 
                 CoroutineScope(Dispatchers.Main).launch {
