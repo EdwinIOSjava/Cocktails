@@ -44,8 +44,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/firstLetterButton"
-        android:text="@string/FirstLetterButton"
+        android:id="@+id/searchCocktailButton"
+        android:text="@string/searchCocktailButton"
         android:backgroundTint="@color/buttonColor"
         android:layout_marginHorizontal="70dp"
         android:layout_marginVertical="4dp"

@@ -7,8 +7,8 @@ interface CocktailService {
 
 //    @GET("lookup.php")
 //    suspend fun findCocktailIngredientsById(@Query("iid") id: String): Ingredients
-//    @GET("search.php")
-//    suspend fun  findCocktailByName(@Query("s") name: String): CocktailResponse
+    @GET("search.php")
+    suspend fun  findCocktailByName(@Query("s") name: String): CocktailResponse
     @GET("lookup.php")
     suspend fun  findCocktailById(@Query("i") id: String): CocktailResponse
     @GET("search.php")
