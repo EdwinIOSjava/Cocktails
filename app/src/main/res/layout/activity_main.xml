@@ -38,7 +38,8 @@
         android:id="@+id/recyclerView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
-        tools:listitem="@layout/item_cocktail"/>
+        tools:listitem="@layout/item_cocktail"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -46,17 +47,18 @@
         android:id="@+id/firstLetterButton"
         android:text="@string/FirstLetterButton"
         android:backgroundTint="@color/buttonColor"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="10dp"
-        android:textSize="20sp" />
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginVertical="4dp"
+        android:textSize="20sp"
+        android:shadowRadius="12"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ingredientButton"
         android:text="@string/IngredientButton"
         android:backgroundTint="@color/buttonColor"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginVertical="4dp"
         android:textSize="20sp"
         />
     <Button
@@ -65,8 +67,8 @@
         android:id="@+id/randomButton"
         android:text="@string/RandomButton"
         android:backgroundTint="@color/buttonColor"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginVertical="4dp"
         android:textSize="20sp"
         />
     <Button
@@ -75,8 +77,8 @@
         android:id="@+id/favoritesButton"
         android:text="@string/FavoritesButton"
         android:backgroundTint="@color/buttonColor"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginVertical="4dp"
         android:textSize="20sp"
         />
     <Button
@@ -85,7 +87,7 @@
         android:id="@+id/filterByGlassButton"
         android:text="@string/FilterByGlassButton"
         android:backgroundTint="@color/buttonColor"
-        android:layout_marginHorizontal="50dp"
+        android:layout_marginHorizontal="70dp"
         android:layout_marginVertical="10dp"
         android:textSize="20sp"
         />

@@ -47,7 +47,7 @@ class DetailActivity : AppCompatActivity() {
         Picasso.get().load(drink.strDrinkThumb).into(binding.coctelImageView)
         binding.cocktailNameTextView.text = drink.strDrink
         //binding.ingredientsTextView.text = drink.strIngredient1 + ", " + drink.strIngredient2 + ", " + drink.strIngredient3 + ", " + drink.strIngredient4 + ", " + drink.strIngredient5
-        binding.ingredientsTextView.text = formatearIngredientes(drink.strIngredient1 + ", " + drink.strIngredient2 + ", " + drink.strIngredient3 + ", " + drink.strIngredient4  + ", " + drink.strIngredient5)
+        binding.ingredientsTextView.text = drink.getIngredientsWithMeasures().joinToString("\n")
         binding.instruccionsTextView.text = drink.strInstructionsES
 
     }
