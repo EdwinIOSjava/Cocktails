@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 val service = getRetrofit()
                 val result = service.findAllsCocktailsByFirstLetter(query)
-                allsCocktailsByFirstLetter = result.drinks
+                allsCocktailsByFirstLetter = result.drinks!!
                 //Log.i("CocktailsByLetter Hilo secundario", "Response: $allsCocktailsByFirstLetter")
 
 
@@ -135,11 +135,23 @@ class MainActivity : AppCompatActivity() {
         binding.searchCocktailButton.setOnClickListener {
             navigateSearchCocktailView()
         }
-
+        binding.ingredientButton.setOnClickListener {
+            navigateIngredientView()
+        }
+        binding.randomButton.setOnClickListener {
+            navigateRandomView()
+        }
     }
 
     fun navigateSearchCocktailView() {
         val intent = Intent(this, SearchCocktailActivity::class.java)
         startActivity(intent)
+    }
+    fun navigateIngredientView() {
+        val intent = Intent(this, IngredientActivity::class.java)
+        startActivity(intent)
+    }
+    fun navigateRandomView() {
+        //val intent = Intent(this, RandomActivity::class.java)
     }
 }

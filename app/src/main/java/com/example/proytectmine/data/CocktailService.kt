@@ -12,9 +12,9 @@ interface CocktailService {
     @GET("lookup.php")
     suspend fun  findCocktailById(@Query("i") id: String): CocktailResponse
     @GET("search.php")
-    suspend fun  findAllsCocktailsByFirstLetter(@Query("f") drinks: String): CocktailResponse
+    suspend fun  findAllsCocktailsByFirstLetter(@Query("f") letter: String): CocktailResponse
     @GET("search.php")
-    suspend fun  findAllsCocktailsByName(@Query("s") name: String): CocktailResponse
+    suspend fun  findAllsCocktailsByName(@Query("s") name: String): CocktailResponse?
 }
 //www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=552
 //lookup.php?iid=552

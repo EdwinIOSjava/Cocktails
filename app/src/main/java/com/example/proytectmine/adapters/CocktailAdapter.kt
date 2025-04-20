@@ -8,7 +8,10 @@ import com.example.proytectmine.data.Drink
 import com.example.proytectmine.databinding.ItemCocktailBinding
 import com.squareup.picasso.Picasso
 
-class CocktailAdapter (var items : List<Drink>, val onClick: (Int) -> Unit): Adapter<CocktailViewHolder>() {
+class CocktailAdapter (
+    var items : List<Drink>,
+    val onClick: (Int) -> Unit
+): Adapter<CocktailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val binding = ItemCocktailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,6 +44,3 @@ class CocktailViewHolder(val binding: ItemCocktailBinding) : RecyclerView.ViewHo
          }
 }
 
-//    val nameTextView: TextView = binding.nameCocktailTextView(R.id.nameCocktail_textView)
-
-//val pictureImageView: ImageView = view.findViewById(R.id.cocktail_imageView)
