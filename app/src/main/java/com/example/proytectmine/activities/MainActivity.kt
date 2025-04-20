@@ -67,6 +67,9 @@ class MainActivity : AppCompatActivity() {
         //binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         searchAllsCocktailsByFirstLetter("m")
+
+        //accedemos a los listener de los botones
+        initListeners()
     }
     // usamos retrofit para hacer la peticion a la API
     fun getRetrofit(): CocktailService {
@@ -127,5 +130,16 @@ class MainActivity : AppCompatActivity() {
                 Log.i("ErrorMainActivityName", "Error: ${e.message}")
             }
         }
+    }
+    private fun initListeners() {
+        binding.searchCocktailButton.setOnClickListener {
+            navigateSearchCocktailView()
+        }
+
+    }
+
+    fun navigateSearchCocktailView() {
+        val intent = Intent(this, SearchCocktailActivity::class.java)
+        startActivity(intent)
     }
 }
