@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ProytectMine</string>
     <string name="SearchViewText">SEARCH FOR A COCKTAIL</string>
-    <string name="searchCocktailButton">Search Coctail</string>
+    <string name="SearchCocktailButton">Search Cocktail</string>
     <string name="IngredientButton">Search By Ingredient</string>
     <string name="RandomButton">Random Cocktail</string>
     <string name="FavoritesButton">Favorites</string>
@@ -12,6 +12,5 @@
     <string name="CocktailName">Cocktail Name</string>
     <string name="Ingredients">Ingredients : </string>
     <string name="Instruccions">"Instruccions : "</string>
-    <string name="action_search">Search</string>
 
 </resources>

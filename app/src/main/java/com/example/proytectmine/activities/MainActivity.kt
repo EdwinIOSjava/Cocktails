@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        supportActionBar?.title = "Cocktails Main"
+        supportActionBar?.title = "Cocktails"
 
 //        searchCocktailByName("Whiskey Sour")
 //        searchCocktailsIngredients("553")
@@ -57,10 +57,10 @@ class MainActivity : AppCompatActivity() {
 
             val cocktail = allsCocktailsByFirstLetter[position]
 
-//            val intent = Intent(this, DetailActivity::class.java)
-//            intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
-//            Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
-//            startActivity(intent)
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
+            Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
         }
 
         binding.recyclerView.adapter = adapter
@@ -68,16 +68,8 @@ class MainActivity : AppCompatActivity() {
 
         searchAllsCocktailsByFirstLetter("m")
 
-        // ahora vamos a navegar con los bottones y a usar sus funciones...
-        binding.searchCocktailButton.setOnClickListener {
-            var intent = Intent(this, SearchCocktailActivity::class.java)
-            startActivity(intent)
-        }
-
-//        binding.ingredientButton.setOnClickListener {
-//            var intent = Intent(this, IngredientActivity::class.java)
-//            startActivity(intent)
- //      }
+        //accedemos a los listener de los botones
+        initListeners()
     }
     // usamos retrofit para hacer la peticion a la API
     fun getRetrofit(): CocktailService {
@@ -120,23 +112,46 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-fun searchAllsCocktailsByFirstLetter(query: String){
-    CoroutineScope(Dispatchers.IO).launch {
-        try {
-            val service = getRetrofit()
-            val result = service.findAllsCocktailsByFirstLetter(query)
-            allsCocktailsByFirstLetter = result.drinks
-            //Log.i("CocktailsByLetter Hilo secundario", "Response: $allsCocktailsByFirstLetter")
+    fun searchAllsCocktailsByFirstLetter(query: String){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val service = getRetrofit()
+                val result = service.findAllsCocktailsByFirstLetter(query)
+                allsCocktailsByFirstLetter = result.drinks!!
+                //Log.i("CocktailsByLetter Hilo secundario", "Response: $allsCocktailsByFirstLetter")
 
 
-            CoroutineScope(Dispatchers.Main).launch {
-                adapter.items = allsCocktailsByFirstLetter
-                adapter.notifyDataSetChanged()
+                CoroutineScope(Dispatchers.Main).launch {
+                    adapter.items = allsCocktailsByFirstLetter
+                    adapter.notifyDataSetChanged()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.i("ErrorMainActivityName", "Error: ${e.message}")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.i("ErrorMainActivityName", "Error: ${e.message}")
         }
     }
-}
+    private fun initListeners() {
+        binding.searchCocktailButton.setOnClickListener {
+            navigateSearchCocktailView()
+        }
+        binding.ingredientButton.setOnClickListener {
+            navigateIngredientView()
+        }
+        binding.randomButton.setOnClickListener {
+            navigateRandomView()
+        }
+    }
+
+    fun navigateSearchCocktailView() {
+        val intent = Intent(this, SearchCocktailActivity::class.java)
+        startActivity(intent)
+    }
+    fun navigateIngredientView() {
+        val intent = Intent(this, IngredientActivity::class.java)
+        startActivity(intent)
+    }
+    fun navigateRandomView() {
+        //val intent = Intent(this, RandomActivity::class.java)
+    }
 }

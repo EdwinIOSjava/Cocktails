@@ -3,7 +3,6 @@ package com.example.proytectmine.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,15 +18,16 @@ import com.example.proytectmine.databinding.ActivitySearchCocktailBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchCocktailActivity : AppCompatActivity() {
-    lateinit var binding: ActivitySearchCocktailBinding
     lateinit var adapter: CocktailAdapter
+    lateinit var binding: ActivitySearchCocktailBinding
 
-    var allsCocktailsByFirstLetter : List<Drink> = listOf()
-    var allsCocktailsByName: List<Drink> = listOf()
+    var cocktails: List<Drink> = listOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -37,49 +37,40 @@ class SearchCocktailActivity : AppCompatActivity() {
         binding = ActivitySearchCocktailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setContentView(R.layout.activity_search_cocktail)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        supportActionBar?.title = "Search Cocktails"
+        //supportActionBar?.hide()
+        supportActionBar?.title = "Search Cocktail"
+        searchAllsCocktailsByFirstLetter("w")
 
-        adapter = CocktailAdapter(allsCocktailsByFirstLetter) { position ->
+        adapter = CocktailAdapter(cocktails) { position ->
 
-            val cocktail = allsCocktailsByFirstLetter[position]
+            val cocktail = cocktails[position]
 
-//            val intent = Intent(this, DetailActivity::class.java)
-//            intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
-//            Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
-//            startActivity(intent)
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
+            Toast.makeText(this, "IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
         }
-
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(this,2)
-        searchAllsCocktailsByFirstLetter("m")
-    }
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-    // vamos a crear en la appBar del searchActivity un boton search para que el usuario pueda buscar un coctel por nombre
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_activity_search, menu)
-        val menuItem = menu?.findItem(R.id.action_search)
-        val searchView = menuItem?.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            override fun onQueryTextSubmit(query: String): Boolean {
-
-                searchAllsCocktailsByName(query)
+            override fun onQueryTextSubmit(query: String): Boolean {// aqui se hace la busqueda cuando se hace click en el boton de buscar
+                searchCocktailByName(query)
                 return false
             }
 
-            override fun onQueryTextChange(query: String): Boolean {
+            override fun onQueryTextChange(newText: String?): Boolean {// aqui se hace la busqueda mientras se escribe
                 return false
             }
+
         })
 
-         //return super.onCreateOptionsMenu(menu)
-        return true
     }
 
     fun getRetrofit(): CocktailService {
@@ -92,36 +83,61 @@ class SearchCocktailActivity : AppCompatActivity() {
         return retrofit.create(CocktailService::class.java)
     }
 
-    fun searchAllsCocktailsByName(query: String) {
+    fun searchCocktailByName(name: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
+
                 val service = getRetrofit()
-                val result = service.findCocktailByName(query)
-                allsCocktailsByName = result.drinks
-                //Log.i("CocktailsByLetter Hilo secundario", "Response: $allsCocktailsByFirstLetter")
+                val cocktails = service.findAllsCocktailsByName(name)
 
+                withContext(Dispatchers.Main){
 
-                CoroutineScope(Dispatchers.Main).launch {
-                    adapter.items = allsCocktailsByName
-                    adapter.notifyDataSetChanged()
+                    if (cocktails?.drinks.isNullOrEmpty() )
+                       //Si la lista esta vacia o es Null mostramos un mensaje de error
+                        Toast.makeText(
+                        this@SearchCocktailActivity,
+                        "No se encontraron cocteles",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    else {
+                        adapter.items = cocktails?.drinks ?: emptyList()
+                        adapter.notifyDataSetChanged()
+                    }
                 }
+
+
             } catch (e: Exception) {
+
+                Log.i(
+                    "Error SEARCHcoctail ",
+                    "Error: RECIBIENDO TODOS LOS COCTELES  : ${e.message}"
+                )
                 e.printStackTrace()
-                Log.i("ErrorMainActivityName", "Error: ${e.message}")
+
+                //mostrar error en la UI
+                withContext(Dispatchers.Main){
+                    Toast.makeText(
+                        this@SearchCocktailActivity,
+                        "Hubo un error al buscar los Cocteles",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
-    fun searchAllsCocktailsByFirstLetter(query: String){
+
+    fun searchAllsCocktailsByFirstLetter(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val service = getRetrofit()
                 val result = service.findAllsCocktailsByFirstLetter(query)
-                allsCocktailsByFirstLetter = result.drinks
+                cocktails = result.drinks!!
                 //Log.i("CocktailsByLetter Hilo secundario", "Response: $allsCocktailsByFirstLetter")
 
 
                 CoroutineScope(Dispatchers.Main).launch {
-                    adapter.items = allsCocktailsByFirstLetter
+                    adapter.items = cocktails
                     adapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
@@ -130,5 +146,4 @@ class SearchCocktailActivity : AppCompatActivity() {
             }
         }
     }
-
 }

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.proytectmine.R
-import com.example.proytectmine.data.CocktailResponse
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
 import com.example.proytectmine.databinding.ActivityDetailBinding
@@ -39,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
         //obtenemos el id del coctel que se selecciono en el activity anterior
         val id = intent.getStringExtra("COCKTAIL_ID")!!
         Log.i("ID==", "Id: $id ")
-        getCoctailById(id)//llamamos a la funcion para obtener los datos del coctel por id
+        getCocktailById(id)//llamamos a la funcion para obtener los datos del coctel por id
 
     }
 
@@ -60,13 +59,13 @@ class DetailActivity : AppCompatActivity() {
 
         return retrofit.create(CocktailService::class.java)
     }
-    fun getCoctailById(id: String) {
+    fun getCocktailById(id: String) {
         // creamos un hilo secundario par ahacer la soilicitud a la API
         CoroutineScope(Dispatchers.IO).launch{
             try{
                 val service = getRetrofit()
                 val result = service.findCocktailById(id)
-                drink= result.drinks.get(0)
+                drink= result.drinks!!.get(0)
 
                 Log.i("nombre del COctail", "Nombre del Drink: ${drink.strDrink}")
 
