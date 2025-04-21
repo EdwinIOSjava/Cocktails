@@ -88,20 +88,21 @@ class SearchCocktailActivity : AppCompatActivity() {
             try {
 
                 val service = getRetrofit()
-                val cocktails = service.findAllsCocktailsByName(name)
+                val result = service.findAllsCocktailsByName(name)
 
                 withContext(Dispatchers.Main){
 
-                    if (cocktails?.drinks.isNullOrEmpty() )
-                       //Si la lista esta vacia o es Null mostramos un mensaje de error
+                    if (result?.drinks.isNullOrEmpty() ) {
+                        //Si la lista esta vacia o es Null mostramos un mensaje de error
                         Toast.makeText(
-                        this@SearchCocktailActivity,
-                        "No se encontraron cocteles",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                            this@SearchCocktailActivity,
+                            "No se encontraron cocteles",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                    else {
-                        adapter.items = cocktails?.drinks ?: emptyList()
+                    } else {
+                        cocktails = result!!.drinks!!
+                        adapter.items = cocktails
                         adapter.notifyDataSetChanged()
                     }
                 }
