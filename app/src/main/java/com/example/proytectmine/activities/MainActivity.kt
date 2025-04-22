@@ -85,21 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//
-//    fun searchCocktailByName(query: String){
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try{
-//                val service =getRetrofit()
-//                val result=service.findCocktailByName(query)
-//                drinkCaracteristics = result.drinks
-//                //Log.i("MainActivity","Response: $drinkCaracteristics")
-//            }catch (e: Exception){
-//                e.printStackTrace()
-//                Log.i("ErrorMainActivityName", "Error: ${e.message}")
-//
-//            }
-//        }
-//    }
+
     fun searchAllsCocktailsByFirstLetter(query: String){
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -140,6 +126,29 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun navigateRandomView() {
-        //val intent = Intent(this, RandomActivity::class.java)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val service = getRetrofit()
+                val result = service.findRandomCocktail()
+                allsCocktailsByFirstLetter = result.drinks!!
+                //Log.i("CocktailsByLetter Hilo secundario", "Response: $allsCocktailsByFirstLetter")
+
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    adapter.items = allsCocktailsByFirstLetter
+                    adapter.notifyDataSetChanged()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.i("ErrorMainActivityName", "Error: ${e.message}")
+            }
+        }
+
+
+        val intent = Intent(this, DetailActivity::class.java)
+//        intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
+//        Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
+//        startActivity(intent)
     }
 }
