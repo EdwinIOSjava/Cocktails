@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.adapter = adapter
-        //binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         searchAllsCocktailsByFirstLetter("m")
 
@@ -85,19 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//    fun searchCocktailsIngredients(query: String) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val service = getRetrofit()
-//                val result = service.findCocktailIngredientsById(query)
-//                //ingredientsList = result.ingredients
-//                //Log.i("Retrofit Coroutine", "Response: $ingredientsList")
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//                Log.i("ErrorMainActivityIngredients", "Error: ${e.message}")
-//            }
-//        }
-//    }
+//
 //    fun searchCocktailByName(query: String){
 //        CoroutineScope(Dispatchers.IO).launch {
 //            try{
