@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- strings.xml A ESPAÑOL-->
+<resources>
+    <string name="app_name">ProytectMine</string>
+    <string name="SearchViewText">BUSCAR UN Coktail</string>
+    <string name="SearchCocktailButton">Buscar Cocktail</string>
+    <string name="IngredientButton">Buscar por Ingrediente</string>
+    <string name="RandomButton">Cocktail Aleatorio</string>
+    <string name="FavoritesButton">Favoritos</string>
+    <string name="FilterByGlassButton">Filtrar por Vaso</string>
+    <string name="textRecyclerView">Top Cocktails: </string>
+    <string name="TitleMain">¿Que te gusta hoy?</string>
+    <string name="SubtitleMain">Buscar por Ingredientes,Nombre o Random</string>
+    <string name="CocktailName">Nombre del Cocktail</string>
+    <string name="Ingredients">Ingredientes : </string>
+    <string name="Instruccions">"Instrucciones : "</string>
+
+
+</resources>
+

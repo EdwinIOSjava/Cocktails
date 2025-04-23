@@ -3,9 +3,11 @@ package com.example.proytectmine.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -151,4 +153,29 @@ class MainActivity : AppCompatActivity() {
 //        Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
 //        startActivity(intent)
     }
+    // creamos el menu search
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu_activity_main, menu)
+//
+//        val menuItem = menu?.findItem(R.id.action_search)
+//        val searchView = menuItem?.actionView as SearchView
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            // detecta que se ha pulsado enter
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                Log.i("MENU", "He pulsado Enter")
+//                return false
+//            }
+//            // aqui el texto que se escribe se recibe por cada cambio que detecta
+//            override fun onQueryTextChange(query: String): Boolean {
+//                horoscopeList = Horoscope.horoscopeList.filter {
+//                    getString(it.name).contains(query, true)
+//                }
+//
+//                adapter.updateItems(horoscopeList)
+//                return false
+//            }
+//        })
+//        return true
+//    }
 }

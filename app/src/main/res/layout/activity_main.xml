@@ -39,8 +39,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:paddingHorizontal="30dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
 
@@ -88,15 +89,16 @@
         android:text="@string/FavoritesButton"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/filterByGlassButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="70dp"
-        android:layout_marginVertical="10dp"
-        android:backgroundTint="@color/buttonColor"
-        android:text="@string/FilterByGlassButton"
-        android:textSize="20sp" />
+
 
 
 </LinearLayout>
+<!--<Button
+android:id="@+id/filterByGlassButton"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginHorizontal="70dp"
+android:layout_marginVertical="10dp"
+android:backgroundTint="@color/buttonColor"
+android:text="@string/FilterByGlassButton"
+android:textSize="20sp" />-->

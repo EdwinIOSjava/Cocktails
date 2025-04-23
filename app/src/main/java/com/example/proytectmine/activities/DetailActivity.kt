@@ -2,6 +2,7 @@ package com.example.proytectmine.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,6 +22,12 @@ class DetailActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetailBinding
     lateinit var drink: Drink// creamos esta variable para recibir la respuesta de la API
+
+//    // variables para Menu item Favorito y manejarlo
+//    var isFavorite = false // si es favorito o no
+//    lateinit var favoriteMenu: MenuItem // identificar y hacer algo cuando le demos click al favorito <3
+//    //creamos variable para la session
+//    lateinit var session: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
