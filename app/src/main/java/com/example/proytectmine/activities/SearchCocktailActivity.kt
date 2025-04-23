@@ -3,6 +3,7 @@ package com.example.proytectmine.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -59,18 +60,7 @@ class SearchCocktailActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            override fun onQueryTextSubmit(query: String): Boolean {// aqui se hace la busqueda cuando se hace click en el boton de buscar
-                searchCocktailByName(query)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {// aqui se hace la busqueda mientras se escribe
-                return false
-            }
-
-        })
 
     }
 
@@ -100,7 +90,10 @@ class SearchCocktailActivity : AppCompatActivity() {
                             "No se encontraron cocteles",
                             Toast.LENGTH_SHORT
                         ).show()
-
+//usaremos en el toast un mensaje con un STRING para que pueda  cambiar de idioma
+//// Obtiene el string del recurso y lo formatea
+//         val message = getString(R.string.ingredient_selected, selectedIngredient)
+// Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                         //creamos un alert dialog para mostrar el mensaje de error
                         val builder = AlertDialog.Builder(this@SearchCocktailActivity)
                         builder.setTitle("Error")
@@ -158,4 +151,41 @@ class SearchCocktailActivity : AppCompatActivity() {
             }
         }
     }
+    // creamos el menu search
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_main, menu)
+
+        val menuItem = menu?.findItem(R.id.action_search)
+        val searchView = menuItem?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            // detecta que se ha pulsado enter
+            override fun onQueryTextSubmit(query: String): Boolean {
+                searchCocktailByName(query)
+                return false
+            }
+            // aqui el texto que se escribe se recibe por cada cambio que detecta
+            override fun onQueryTextChange(query: String): Boolean {
+//                horoscopeList = Horoscope.horoscopeList.filter {
+//                    getString(it.name).contains(query, true)
+//                }
+//
+//                adapter.updateItems(horoscopeList)
+                return false
+            }
+        })
+        return true
+    }
+//    binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//
+//        override fun onQueryTextSubmit(query: String): Boolean {// aqui se hace la busqueda cuando se hace click en el boton de buscar
+//            searchCocktailByName(query)
+//                return false
+//        }
+//
+//        override fun onQueryTextChange(newText: String?): Boolean {// aqui se hace la busqueda mientras se escribe
+//            return false
+//        }
+//
+//    })
 }
