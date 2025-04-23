@@ -2,6 +2,7 @@ package com.example.proytectmine.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -96,4 +97,12 @@ class DetailActivity : AppCompatActivity() {
 // Asignamos el resultado al EditText
         return listaFormateada
     }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.menu_activity_detail, menu)
+//
+//        favoriteMenu = menu.findItem(R.id.action_favorite)
+//        setFavoriteIcon()
+//
+//        return true
+//    }
 }
