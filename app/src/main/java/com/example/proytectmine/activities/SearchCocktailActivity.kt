@@ -153,7 +153,7 @@ class SearchCocktailActivity : AppCompatActivity() {
     }
     // creamos el menu search
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_activity_main, menu)
+        menuInflater.inflate(R.menu.menu_activity_search, menu)
 
         val menuItem = menu?.findItem(R.id.action_search)
         val searchView = menuItem?.actionView as SearchView
@@ -176,16 +176,4 @@ class SearchCocktailActivity : AppCompatActivity() {
         })
         return true
     }
-//    binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//
-//        override fun onQueryTextSubmit(query: String): Boolean {// aqui se hace la busqueda cuando se hace click en el boton de buscar
-//            searchCocktailByName(query)
-//                return false
-//        }
-//
-//        override fun onQueryTextChange(newText: String?): Boolean {// aqui se hace la busqueda mientras se escribe
-//            return false
-//        }
-//
-//    })
 }

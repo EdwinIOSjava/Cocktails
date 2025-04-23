@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="5dp"
     android:layout_marginVertical="5dp"
+    android:padding="10dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    android:padding="10dp">
+    app:cardElevation="5dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <ImageView
-            tools:src="@mipmap/ic_launcher"
             android:id="@+id/cocktailImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop">
+            android:scaleType="centerCrop"
+            tools:src="@mipmap/ic_launcher">
             <!-- este hace que la iamgen se agrande hasta el tamaño XX-->
 
 
         </ImageView>
-        <TextView
-            android:id="@+id/nameCocktail_textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:background="@color/buttonColor"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            tools:text="Wishky Sour"
-            >
 
-        </TextView>
-    </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/favoriteImageView"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="end|center"
+            android:src="@drawable/ic_favorite_selected"
+            app:tint="@color/favorite" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/nameCocktail_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/buttonColor"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Wishky Sour">
+
+    </TextView>
+</androidx.cardview.widget.CardView>

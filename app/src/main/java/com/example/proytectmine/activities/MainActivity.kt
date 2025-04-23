@@ -32,9 +32,10 @@ class MainActivity : AppCompatActivity() {
 
     // creamos una lista de cocktails vacia para poder llenarla con los resultados de la API
 
-    var ingredientsList: List<Ingredients> = listOf()
-    var drinkCaracteristics : List<Drink> = listOf()// aqui guardamos la respuesta de la API
+
     var allsCocktailsByFirstLetter : List<Drink> = listOf()
+    var selectedPosition = -1// esto sirve para saber en que posicion esta el item seleccionado
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -152,6 +153,10 @@ class MainActivity : AppCompatActivity() {
 //        intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
 //        Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
 //        startActivity(intent)
+    }
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged()
     }
 
 }

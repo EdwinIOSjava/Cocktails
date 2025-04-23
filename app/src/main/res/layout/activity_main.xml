@@ -41,7 +41,7 @@
         android:id="@+id/recyclerView"
         android:paddingHorizontal="30dp"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="210dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:clipToPadding="false"

@@ -1,5 +1,6 @@
 package com.example.proytectmine.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -11,7 +12,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.proytectmine.R
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
+import com.example.proytectmine.data.SessionManager
 import com.example.proytectmine.databinding.ActivityDetailBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +27,13 @@ class DetailActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetailBinding
     lateinit var drink: Drink// creamos esta variable para recibir la respuesta de la API
+
+
+    lateinit var progressBar: LinearProgressIndicator
+    var isFavorite = false
+    lateinit var favoriteMenu: MenuItem
+
+    lateinit var session: SessionManager
 
 //    // variables para Menu item Favorito y manejarlo
 //    var isFavorite = false // si es favorito o no
@@ -42,7 +53,9 @@ class DetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
        supportActionBar?.title = "Drink Details"
+        session = SessionManager(this)
         //obtenemos el id del coctel que se selecciono en el activity anterior
         val id = intent.getStringExtra("COCKTAIL_ID")!!
         Log.i("ID==", "Id: $id ")
@@ -57,6 +70,8 @@ class DetailActivity : AppCompatActivity() {
         binding.ingredientsTextView.text = drink.getIngredientsWithMeasures().joinToString("\n")
         binding.instruccionsTextView.text = drink.strInstructionsES
 
+        isFavorite = session.isFavorite(drink.idDrink!!)
+        setFavoriteIcon()
     }
 
     fun getRetrofit(): CocktailService {
@@ -97,12 +112,44 @@ class DetailActivity : AppCompatActivity() {
 // Asignamos el resultado al EditText
         return listaFormateada
     }
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        menuInflater.inflate(R.menu.menu_activity_detail, menu)
-//
-//        favoriteMenu = menu.findItem(R.id.action_favorite)
-//        setFavoriteIcon()
-//
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_detail, menu)
+
+        favoriteMenu = menu.findItem(R.id.action_favorite)
+        setFavoriteIcon()
+
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_favorite -> {
+                isFavorite = !isFavorite
+                session.setFavorite(drink.idDrink!!, isFavorite)
+                setFavoriteIcon()
+                true
+            }
+            R.id.action_share -> {
+                val sendIntent = Intent()
+                sendIntent.setAction(Intent.ACTION_SEND)
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                sendIntent.setType("text/plain")
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
+                true
+            }
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    private fun setFavoriteIcon() {
+        if (isFavorite) {
+            favoriteMenu.setIcon(R.drawable.ic_favorite_selected)
+        } else {
+            favoriteMenu.setIcon(R.drawable.ic_favorite)
+        }
+    }
 }
