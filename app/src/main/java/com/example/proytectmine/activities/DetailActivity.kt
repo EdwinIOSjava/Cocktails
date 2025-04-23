@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.proytectmine.R
+import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
 import com.example.proytectmine.data.SessionManager
@@ -24,7 +25,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class DetailActivity : AppCompatActivity() {
-
+    companion object {
+        const val EXTRA_HOROSCOPE_ID = "COCKTAIL_ID"// esto sirve para pasar datos a la actividad
+    }
+    lateinit var adapter: CocktailAdapter
     lateinit var binding: ActivityDetailBinding
     lateinit var drink: Drink// creamos esta variable para recibir la respuesta de la API
 
@@ -57,7 +61,7 @@ class DetailActivity : AppCompatActivity() {
        supportActionBar?.title = "Drink Details"
         session = SessionManager(this)
         //obtenemos el id del coctel que se selecciono en el activity anterior
-        val id = intent.getStringExtra("COCKTAIL_ID")!!
+        val id = intent.getStringExtra(EXTRA_HOROSCOPE_ID)!!
         Log.i("ID==", "Id: $id ")
         getCocktailById(id)//llamamos a la funcion para obtener los datos del coctel por id
 

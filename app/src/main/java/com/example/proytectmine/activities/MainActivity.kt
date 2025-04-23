@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proytectmine.R
+import com.example.proytectmine.activities.DetailActivity.Companion.EXTRA_HOROSCOPE_ID
 import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.CocktailResponse
 import com.example.proytectmine.data.CocktailService
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             val cocktail = allsCocktailsByFirstLetter[position]
 
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
+            intent.putExtra(EXTRA_HOROSCOPE_ID, cocktail.idDrink)
             Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
@@ -148,11 +149,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-        val intent = Intent(this, DetailActivity::class.java)
-//        intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
-//        Toast.makeText(this,"IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
-//        startActivity(intent)
     }
     override fun onResume() {
         super.onResume()
