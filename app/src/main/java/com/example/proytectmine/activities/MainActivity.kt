@@ -31,11 +31,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: CocktailAdapter
     lateinit var binding: ActivityMainBinding
 
-    // creamos una lista de cocktails vacia para poder llenarla con los resultados de la API
+    // vamos a crear una base de datos local para almacenar los cocteles favoritos
+    lateinit var favoritesDAO: favoritesDAO
+    var favoritesList: List<Drink> = listOf()// aqui guardaremos los cocteles favoritos
+
 
 
     var allsCocktailsByFirstLetter : List<Drink> = listOf()
-    var selectedPosition = -1// esto sirve para saber en que posicion esta el item seleccionado
+
 
 
 
