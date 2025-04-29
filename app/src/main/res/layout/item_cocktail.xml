@@ -9,22 +9,20 @@
     android:layout_marginVertical="5dp"
     android:padding="10dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp">
+    app:cardElevation="5dp"
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
+
             android:id="@+id/cocktailImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:src="@mipmap/ic_launcher">
-            <!-- este hace que la iamgen se agrande hasta el tamaño XX-->
-
-
-        </ImageView>
+            tools:src="@mipmap/ic_launcher"/>
 
         <ImageView
             android:id="@+id/favoriteImageView"

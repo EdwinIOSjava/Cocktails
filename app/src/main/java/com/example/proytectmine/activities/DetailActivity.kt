@@ -28,12 +28,10 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_HOROSCOPE_ID = "COCKTAIL_ID"// esto sirve para pasar datos a la actividad
     }
-    lateinit var adapter: CocktailAdapter
+
     lateinit var binding: ActivityDetailBinding
     lateinit var drink: Drink// creamos esta variable para recibir la respuesta de la API
 
-
-    lateinit var progressBar: LinearProgressIndicator
     var isFavorite = false
     lateinit var favoriteMenu: MenuItem
 
@@ -143,6 +141,7 @@ class DetailActivity : AppCompatActivity() {
                 true
             }
             android.R.id.home -> {
+                //
                 finish()
                 true
             }

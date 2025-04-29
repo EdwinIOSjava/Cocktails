@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -45,6 +46,7 @@ class SearchCocktailActivity : AppCompatActivity() {
             insets
         }
         //supportActionBar?.hide()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Search Cocktail"
         searchAllsCocktailsByFirstLetter("w")
 
@@ -175,5 +177,21 @@ class SearchCocktailActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged()
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+
+
+            android.R.id.home -> {
+                //
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
