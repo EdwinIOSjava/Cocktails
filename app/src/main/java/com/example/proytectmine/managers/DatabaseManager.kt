@@ -12,20 +12,20 @@ class DatabaseManager(context: Context): SQLiteOpenHelper(
     null,
     DATABASE_VERSION
 ) {
-    companion object{
+    companion object {
         const val DATABASE_NAME = "favorites.db"
         const val DATABASE_VERSION = 1
-    }
+
 
     //crear la tabla favorites
     private const val SQL_CREATE_TABLE_FAVORITES =
-        "CREATE TABLE ${Drink.TABLE_NAME}("+
-                "${Drink.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                "${Drink.COLUMN_NAME} TEXT, "+
+        "CREATE TABLE ${Drink.TABLE_NAME}(" +
+                "${Drink.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "${Drink.COLUMN_NAME} TEXT, " +
                 "${Drink.COLUMN_IMAGE} TEXT)"
-    private const val SQL_DROP_TABLE_FAVORITES ="DROP TABLE IF EXISTS ${Drink.TABLE_NAME}"
-
-    override fun onCreate(db: SQLiteDatabase?) {
+    private const val SQL_DROP_TABLE_FAVORITES = "DROP TABLE IF EXISTS ${Drink.TABLE_NAME}"
+}
+    override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_TABLE_FAVORITES)
         Log.i("DATABASE", "Created table FAVORITES")
     }
@@ -35,7 +35,7 @@ class DatabaseManager(context: Context): SQLiteOpenHelper(
         onCreate(db) // hacer esto elimina por copleto la tabla y la vuelve a crear
     }
 
-    override fun onDestroy(db: SQLiteDatabase) {
+     fun onDestroy(db: SQLiteDatabase) {
         db.execSQL(SQL_DROP_TABLE_FAVORITES)
         Log.i("DATABASE", "Deleted table FAVORITES")
 
