@@ -19,6 +19,7 @@ import com.example.proytectmine.data.CocktailResponse
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
 import com.example.proytectmine.data.Ingredients
+import com.example.proytectmine.data.favoritesDAO
 import com.example.proytectmine.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        favoritesDAO= favoritesDAO(this)// aqui creamos la base de datos y le pasamos el contexto
         supportActionBar?.title = "Cocktails"
 
 //        searchCocktailByName("Whiskey Sour")
