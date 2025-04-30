@@ -132,7 +132,8 @@ class DetailActivity : AppCompatActivity() {
 
                 if (isFavorite) {
                     favoritesDAO.insert(drink)
-                    session.setFavorite(drink.idDrink!!, isFavorite)
+                    //session.setFavorite(drink.idDrink!!, isFavorite)
+
                     Toast.makeText(this,"Se ha Agregado a Favoritos el Cocktail: ${drink.strDrink}", Toast.LENGTH_SHORT).show()
                 } else {
                     favoritesDAO.delete(drink)
