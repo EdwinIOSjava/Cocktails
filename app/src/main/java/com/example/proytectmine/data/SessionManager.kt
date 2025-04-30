@@ -14,6 +14,7 @@ class SessionManager (context: Context) {
         // guardamos los cambios : OBLIGATORIO O SINO NO SE GUARDAN
         editor.apply()
     }
+    //commit
 
     // retornamos el signo favorito y le damos un valor por defecto en caso de que no exista
     fun getFavorite(): String {
