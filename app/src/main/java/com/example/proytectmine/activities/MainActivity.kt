@@ -3,23 +3,18 @@ package com.example.proytectmine.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proytectmine.R
 import com.example.proytectmine.activities.DetailActivity.Companion.EXTRA_HOROSCOPE_ID
 import com.example.proytectmine.adapters.CocktailAdapter
-import com.example.proytectmine.data.CocktailResponse
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
-import com.example.proytectmine.data.Ingredients
-import com.example.proytectmine.data.favoritesDAO
+import com.example.proytectmine.data.FavoritesDAO
 import com.example.proytectmine.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,9 +27,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: CocktailAdapter
     lateinit var binding: ActivityMainBinding
 
-    // vamos a crear una base de datos local para almacenar los cocteles favoritos
-    lateinit var favoritesDAO: favoritesDAO
-    var favoritesList: List<Drink> = listOf()// aqui guardaremos los cocteles favoritos
+
 
 
 
@@ -55,7 +48,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        favoritesDAO= favoritesDAO(this)// aqui creamos la base de datos y le pasamos el contexto
+
+
         supportActionBar?.title = "Cocktails"
 
 //        searchCocktailByName("Whiskey Sour")
@@ -124,6 +118,9 @@ class MainActivity : AppCompatActivity() {
         binding.randomButton.setOnClickListener {
             navigateRandomView()
         }
+        binding.favoritesButton.setOnClickListener {
+            navigateFavoritesView()
+        }
     }
 
     fun navigateSearchCocktailView() {
@@ -132,6 +129,10 @@ class MainActivity : AppCompatActivity() {
     }
     fun navigateIngredientView() {
         val intent = Intent(this, IngredientActivity::class.java)
+        startActivity(intent)
+    }
+    fun navigateFavoritesView() {
+        val intent = Intent(this, FavoritesActivity::class.java)
         startActivity(intent)
     }
     fun navigateRandomView() {

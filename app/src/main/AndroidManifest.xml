@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ProytectMine"
         tools:targetApi="31">
         <activity
+            android:name=".activities.FavoritesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.IngredientActivity"
             android:exported="false" />
         <activity

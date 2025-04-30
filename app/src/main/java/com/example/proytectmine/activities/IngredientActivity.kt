@@ -3,6 +3,7 @@ package com.example.proytectmine.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -153,6 +154,7 @@ class IngredientActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Search BY INGREDIENT"
         searchAllsCocktailsByIngredient("gin")
         adapter = CocktailAdapter(filteredDrinks) { position ->
@@ -207,18 +209,17 @@ class IngredientActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
 
-//    fun searchCocktailsIngredients(ingredient: String) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val service = getRetrofit()
-//                val result = service.findCocktailIngredientsById(ingredient)
-//                //ingredientsList = result.ingredients
-//                //Log.i("Retrofit Coroutine", "Response: $ingredientsList")
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//                Log.i("ErrorMainActivityIngredients", "Error: ${e.message}")
-//            }
-//        }
-//    }
+
+            android.R.id.home -> {
+                //
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }

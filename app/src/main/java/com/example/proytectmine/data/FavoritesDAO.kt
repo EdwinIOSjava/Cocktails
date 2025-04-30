@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.example.proytectmine.managers.DatabaseManager
 
-class favoritesDAO(context: Context) {
+class FavoritesDAO(context: Context) {
     val databaseManager= DatabaseManager(context)
 
     fun insert(drink: Drink){
@@ -52,7 +52,22 @@ class favoritesDAO(context: Context) {
             db.close()
         }
     }
-    fun findById(id: Long): Drink? {
+
+    fun delete(drink: Drink) {
+        val db = databaseManager.writableDatabase
+
+        try {
+            val deletedRows = db.delete(Drink.TABLE_NAME, "${Drink.COLUMN_ID} = '${drink.idDrink}'", null)
+
+            Log.i("DATABASE", "Deleted drink with id: ${drink.idDrink}")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            db.close()
+        }
+    }
+
+    fun findById(id: String): Drink? {
         // obtenemos la base de datos en modo lectura
         val db = databaseManager.readableDatabase
 
@@ -61,7 +76,7 @@ class favoritesDAO(context: Context) {
             Drink.COLUMN_NAME,
             Drink.COLUMN_IMAGE
         )
-        val selection = "${Drink.COLUMN_ID} = ${id}" 
+        val selection = "${Drink.COLUMN_ID} = '${id}'"
         
         var drink: Drink? = null
 

@@ -56,7 +56,7 @@ class SearchCocktailActivity : AppCompatActivity() {
 
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("COCKTAIL_ID", cocktail.idDrink)
-            Toast.makeText(this, "IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "IdCOctel: ${cocktail.idDrink}", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
         binding.recyclerView.adapter = adapter
