@@ -14,8 +14,8 @@ import com.example.proytectmine.activities.DetailActivity.Companion.EXTRA_HOROSC
 import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
-import com.example.proytectmine.data.FavoritesDAO
 import com.example.proytectmine.databinding.ActivityMainBinding
+import com.example.proytectmine.src.FavoritesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,11 +29,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
     var allsCocktailsByFirstLetter : List<Drink> = listOf()
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +51,8 @@ class MainActivity : AppCompatActivity() {
 //        searchCocktailByName("Whiskey Sour")
 //        searchCocktailsIngredients("553")
 
-
-        adapter = CocktailAdapter(allsCocktailsByFirstLetter) { position ->
+        val coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        adapter = CocktailAdapter(allsCocktailsByFirstLetter,coctelesFavoritosById) { position ->
 
             val cocktail = allsCocktailsByFirstLetter[position]
 

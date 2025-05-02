@@ -18,18 +18,23 @@ import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
 import com.example.proytectmine.databinding.ActivitySearchCocktailBinding
+import com.example.proytectmine.src.FavoritesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.collections.addAll
+import kotlin.text.clear
 
 class SearchCocktailActivity : AppCompatActivity() {
     lateinit var adapter: CocktailAdapter
     lateinit var binding: ActivitySearchCocktailBinding
 
     var cocktails: List<Drink> = listOf()
+    lateinit var coctelesFavoritosById : List<String>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +55,8 @@ class SearchCocktailActivity : AppCompatActivity() {
         supportActionBar?.title = "Search Cocktail"
         searchAllsCocktailsByFirstLetter("w")
 
-        adapter = CocktailAdapter(cocktails) { position ->
+        coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        adapter = CocktailAdapter(cocktails,coctelesFavoritosById) { position ->
 
             val cocktail = cocktails[position]
 
@@ -65,6 +71,7 @@ class SearchCocktailActivity : AppCompatActivity() {
 
 
     }
+
 
     fun getRetrofit(): CocktailService {
 
@@ -134,6 +141,7 @@ class SearchCocktailActivity : AppCompatActivity() {
         }
     }
 
+
     fun searchAllsCocktailsByFirstLetter(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -182,6 +190,7 @@ class SearchCocktailActivity : AppCompatActivity() {
         super.onResume()
         adapter.notifyDataSetChanged()
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
 
@@ -194,4 +203,5 @@ class SearchCocktailActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }

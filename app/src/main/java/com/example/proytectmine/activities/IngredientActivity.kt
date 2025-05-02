@@ -20,8 +20,10 @@ import com.example.proytectmine.R
 import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
+import com.example.proytectmine.data.FavoritesDAO
 import com.example.proytectmine.databinding.ActivityDetailBinding
 import com.example.proytectmine.databinding.ActivityIngredientBinding
+import com.example.proytectmine.src.FavoritesRepository
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
@@ -37,7 +39,8 @@ class IngredientActivity : AppCompatActivity() {
     lateinit var adapter: CocktailAdapter
 
     private var filteredDrinks: List<Drink> = emptyList()
-    
+
+
     private val ingredientes = arrayOf(
         "Light rum",
         "Bourbon",
@@ -157,7 +160,10 @@ class IngredientActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Search BY INGREDIENT"
         searchAllsCocktailsByIngredient("gin")
-        adapter = CocktailAdapter(filteredDrinks) { position ->
+        val coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+
+
+        adapter = CocktailAdapter(filteredDrinks,coctelesFavoritosById) { position ->
 
             val clickedDrink = filteredDrinks[position]
 

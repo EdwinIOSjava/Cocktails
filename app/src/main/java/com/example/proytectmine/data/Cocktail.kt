@@ -34,6 +34,10 @@ data class Drink(
     const val COLUMN_NAME = "name"
     const val COLUMN_IMAGE = "image"
 }
+    fun isFavorite(id: String): Boolean {
+        val favorite = false
+        return favorite
+    }
 }
 
 data class DrinkOriginal(
@@ -133,6 +137,10 @@ data class DrinkOriginal(
         return getIngredients().mapIndexed { i, item ->
             " ${getMeasures()[i] ?: "Al gusto"} - $item "
         }
+    }
+    fun isFavorite(id: String): Boolean {
+        val favorite = true
+        return favorite
     }
 
     companion object{

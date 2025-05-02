@@ -15,6 +15,7 @@ import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.Drink
 import com.example.proytectmine.data.FavoritesDAO
 import com.example.proytectmine.databinding.ActivityFavoritesBinding
+import com.example.proytectmine.src.FavoritesRepository
 
 class FavoritesActivity : AppCompatActivity() {
 
@@ -22,7 +23,8 @@ class FavoritesActivity : AppCompatActivity() {
     lateinit var adapter: CocktailAdapter
     
     lateinit var favoritesDAO: FavoritesDAO
-    var favoritesList: List<Drink> = listOf() // aqui guardaremos los cocteles favoritos
+
+
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +37,18 @@ class FavoritesActivity : AppCompatActivity() {
             insets
         }
         favoritesDAO= FavoritesDAO(this)// aqui creamos la base de datos y le pasamos el contexto
-        favoritesList = favoritesDAO.findAll()
-        Log.i("Favorites", "Favorites: $favoritesList")
+
+
 
         supportActionBar?.title = "Favorites Cocktail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        adapter = CocktailAdapter(favoritesList) { position ->
+        val coctelesFavoritos = FavoritesRepository.getFavoriteDrinks(this)
+        val coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        Log.i("Favorites", "Favorites: $coctelesFavoritos")
+        adapter = CocktailAdapter(coctelesFavoritos,coctelesFavoritosById) { position ->
 
-            val cocktail = favoritesList[position]
+            val cocktail = coctelesFavoritos[position]
 
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("COCKTAIL_ID", cocktail.idDrink)

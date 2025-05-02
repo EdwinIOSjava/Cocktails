@@ -6,16 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.proytectmine.data.Drink
-import com.example.proytectmine.data.SessionManager
 import com.example.proytectmine.databinding.ItemCocktailBinding
 import com.squareup.picasso.Picasso
 
 class CocktailAdapter(
     var items: List<Drink>,
+    var favoritosListByIds: List<String>,
     val onClick: (Int) -> Unit
 ) : Adapter<CocktailViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CocktailViewHolder {
         val binding =
             ItemCocktailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CocktailViewHolder(binding)
@@ -25,7 +28,7 @@ class CocktailAdapter(
 
     override fun onBindViewHolder(holder: CocktailViewHolder, position: Int) {
         val cocktail = items[position]
-        holder.render(cocktail)
+        holder.render(cocktail, favoritosListByIds)
         holder.itemView.setOnClickListener { onClick(position) }
     }
 
@@ -35,23 +38,23 @@ class CocktailViewHolder(val binding: ItemCocktailBinding) : RecyclerView.ViewHo
 
     //Log.d("VariablestrImageSource", "Response:")
 
-    fun render(cocktail: Drink) {
+    fun render(cocktail: Drink, favoritosListByIds: List<String>) {
 
         binding.nameCocktailTextView.text = cocktail.strDrink
-//        Log.d("VariablestrImageSource", "Response: ${cocktail.strImageSource}")
-//        Log.d("VariableCocktailImageView", "Response: ${cocktail.strImageSource}")
 
         Picasso.get()
             .load(cocktail.strDrinkThumb)
             .into(binding.cocktailImageView)
 
-        if (SessionManager(itemView.context).isFavorite(cocktail.idDrink!!)) {
+        if (cocktail.idDrink in favoritosListByIds) {
             binding.favoriteImageView.visibility = View.VISIBLE
         } else {
             binding.favoriteImageView.visibility = View.GONE
         }
 
     }
+
+
 
 
 }

@@ -13,7 +13,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.proytectmine.R
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
-import com.example.proytectmine.data.SessionManager
 import com.example.proytectmine.data.FavoritesDAO
 import com.example.proytectmine.databinding.ActivityDetailBinding
 import com.squareup.picasso.Picasso
@@ -34,15 +33,9 @@ class DetailActivity : AppCompatActivity() {
     var isFavorite = false
     lateinit var favoriteMenu: MenuItem
 
-    lateinit var session: SessionManager
 
     lateinit var favoritesDAO: FavoritesDAO
 
-//    // variables para Menu item Favorito y manejarlo
-//    var isFavorite = false // si es favorito o no
-//    lateinit var favoriteMenu: MenuItem // identificar y hacer algo cuando le demos click al favorito <3
-//    //creamos variable para la session
-//    lateinit var session: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,11 +51,12 @@ class DetailActivity : AppCompatActivity() {
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
        supportActionBar?.title = "Drink Details"
-        session = SessionManager(this)
+
         favoritesDAO = FavoritesDAO(this)
+
         //obtenemos el id del coctel que se selecciono en el activity anterior
         val id = intent.getStringExtra(EXTRA_HOROSCOPE_ID)!!
-        Log.i("ID==", "Id: $id ")
+        //Log.i("ID==", "Id: $id ")
         getCocktailById(id)//llamamos a la funcion para obtener los datos del coctel por id
 
     }
@@ -74,9 +68,9 @@ class DetailActivity : AppCompatActivity() {
 //        binding.ingredientsTextView.text = drink.getIngredientsWithMeasures().joinToString("\n")
 //        binding.instruccionsTextView.text = drink.strInstructionsES
 
-        //isFavorite = session.isFavorite(drink.idDrink!!)
+        // Consultamos la base de datos para saber si es favorito, si no lo es lo añadimos
         isFavorite = favoritesDAO.findById(drink.idDrink) != null
-        setFavoriteIcon()
+        setFavoriteIcon()//Establecemos el icono correcto
     }
 
     fun getRetrofit(): CocktailService {
@@ -109,6 +103,7 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
+
     fun formatearIngredientes(texto:String): String {
         val listaFormateada = texto
             .split(",")
@@ -117,6 +112,7 @@ class DetailActivity : AppCompatActivity() {
 // Asignamos el resultado al EditText
         return listaFormateada
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_activity_detail, menu)
 
@@ -132,11 +128,12 @@ class DetailActivity : AppCompatActivity() {
 
                 if (isFavorite) {
                     favoritesDAO.insert(drink)
-                    //session.setFavorite(drink.idDrink!!, isFavorite)
-
                     Toast.makeText(this,"Se ha Agregado a Favoritos el Cocktail: ${drink.strDrink}", Toast.LENGTH_SHORT).show()
+
                 } else {
                     favoritesDAO.delete(drink)
+                    Toast.makeText(this,"Se ha Eliminado de Favoritos el Cocktail: ${drink.strDrink}", Toast.LENGTH_SHORT).show()
+
                 }
                 setFavoriteIcon()
                 true
@@ -164,6 +161,7 @@ class DetailActivity : AppCompatActivity() {
             favoriteMenu.setIcon(R.drawable.ic_favorite_selected)
         } else {
             favoriteMenu.setIcon(R.drawable.ic_favorite)
+
         }
     }
 }
