@@ -1,23 +1,22 @@
 package com.example.proytectmine.data
 
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CocktailService {
 
     @GET("filter.php")
-    suspend fun findCocktailByIngredients(@Query("i") i: String): CocktailResponse
+    suspend fun findCocktailByIngredients(@Query("i") i: String): CocktailResponseReduced
 
     //www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
     @GET("lookup.php")
-    suspend fun  findCocktailById(@Query("i") id: String): CocktailResponse
+    suspend fun  findCocktailById(@Query("i") id: String): CocktailResponseFull
     @GET("search.php")
-    suspend fun  findAllsCocktailsByFirstLetter(@Query("f") letter: String): CocktailResponse
+    suspend fun  findAllsCocktailsByFirstLetter(@Query("f") letter: String): CocktailResponseReduced
     @GET("search.php")
-    suspend fun  findAllsCocktailsByName(@Query("s") name: String): CocktailResponse?
+    suspend fun  findAllsCocktailsByName(@Query("s") name: String): CocktailResponseReduced?
     @GET("random.php")
-    suspend fun findRandomCocktail(): CocktailResponse
+    suspend fun findRandomCocktail(): CocktailResponseReduced
 }
 //www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=552
 //lookup.php?iid=552

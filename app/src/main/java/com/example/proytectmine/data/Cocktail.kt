@@ -6,9 +6,12 @@ import com.google.gson.annotations.SerializedName
 //import com.google.gson.annotations.SerializedName// SerializedName sirve para que el nombre de la variable sea el mismo que el de la API
 
 // en esta clase creamos el modelo de datos de la respuesta de la API
-data class CocktailResponse (
+data class CocktailResponseReduced (
     val drinks: List<Drink>?,
     val ingredients: List<IngredientsResponse>
+)
+data class CocktailResponseFull(
+    val drinks: List<DrinkFull>
 )
 
 data class Ingredients(
@@ -28,19 +31,9 @@ data class Drink(
     val idDrink: String,
     val strDrink: String?,
     val strDrinkThumb: String?
-){companion object {
-    const val TABLE_NAME = "favorites"
-    const val COLUMN_ID = "id"
-    const val COLUMN_NAME = "name"
-    const val COLUMN_IMAGE = "image"
-}
-    fun isFavorite(id: String): Boolean {
-        val favorite = false
-        return favorite
-    }
-}
+)
 
-data class DrinkOriginal(
+data class DrinkFull(
     val idDrink: String?,
     val strDrink: String?,
     val strDrinkAlternate: String?,
@@ -143,10 +136,62 @@ data class DrinkOriginal(
         return favorite
     }
 
-    companion object{
-        const val  TABLE_NAME = "favorites"
-        const val COLUMN_ID = "id"
-        const val COLUMN_NAME = "name"
-        const val COLUMN_IMAGE = "image"
+    companion object {
+        const val TABLE_NAME = "favorites"
+
+        // Columnas básicas
+        const val COLUMN_ID = "idDrink"
+        const val COLUMN_NAME = "strDrink"
+        const val COLUMN_ALTERNATE = "strDrinkAlternate"
+        const val COLUMN_TAGS = "strTags"
+        const val COLUMN_VIDEO = "strVideo"
+        const val COLUMN_CATEGORY = "strCategory"
+        const val COLUMN_IBA = "strIBA"
+        const val COLUMN_ALCOHOLIC = "strAlcoholic"
+        const val COLUMN_GLASS = "strGlass"
+        const val COLUMN_INSTRUCTIONS = "strInstructions"
+        const val COLUMN_INSTRUCTIONS_ES = "strInstructionsES"
+        const val COLUMN_INSTRUCTIONS_DE = "strInstructionsDE"
+        const val COLUMN_INSTRUCTIONS_FR = "strInstructionsFR"
+        const val COLUMN_INSTRUCTIONS_IT = "strInstructionsIT"
+        const val COLUMN_INSTRUCTIONS_ZH_HANS = "strInstructionsZH_HANS"
+        const val COLUMN_INSTRUCTIONS_ZH_HANT = "strInstructionsZH_HANT"
+        const val COLUMN_IMAGE = "strDrinkThumb"
+        const val COLUMN_IMAGE_SOURCE = "strImageSource"
+        const val COLUMN_IMAGE_ATTRIBUTION = "strImageAttribution"
+        const val COLUMN_CC_CONFIRMED = "strCreativeCommonsConfirmed"
+        const val COLUMN_DATE_MODIFIED = "dateModified"
+
+        // Ingredientes y medidas
+        const val COLUMN_INGREDIENT1 = "strIngredient1"
+        const val COLUMN_MEASURE1 = "strMeasure1"
+        const val COLUMN_INGREDIENT2 = "strIngredient2"
+        const val COLUMN_MEASURE2 = "strMeasure2"
+        const val COLUMN_INGREDIENT3 = "strIngredient3"
+        const val COLUMN_MEASURE3 = "strMeasure3"
+        const val COLUMN_INGREDIENT4 = "strIngredient4"
+        const val COLUMN_MEASURE4 = "strMeasure4"
+        const val COLUMN_INGREDIENT5 = "strIngredient5"
+        const val COLUMN_MEASURE5 = "strMeasure5"
+        const val COLUMN_INGREDIENT6 = "strIngredient6"
+        const val COLUMN_MEASURE6 = "strMeasure6"
+        const val COLUMN_INGREDIENT7 = "strIngredient7"
+        const val COLUMN_MEASURE7 = "strMeasure7"
+        const val COLUMN_INGREDIENT8 = "strIngredient8"
+        const val COLUMN_MEASURE8 = "strMeasure8"
+        const val COLUMN_INGREDIENT9 = "strIngredient9"
+        const val COLUMN_MEASURE9 = "strMeasure9"
+        const val COLUMN_INGREDIENT10 = "strIngredient10"
+        const val COLUMN_MEASURE10 = "strMeasure10"
+        const val COLUMN_INGREDIENT11 = "strIngredient11"
+        const val COLUMN_MEASURE11 = "strMeasure11"
+        const val COLUMN_INGREDIENT12 = "strIngredient12"
+        const val COLUMN_MEASURE12 = "strMeasure12"
+        const val COLUMN_INGREDIENT13 = "strIngredient13"
+        const val COLUMN_MEASURE13 = "strMeasure13"
+        const val COLUMN_INGREDIENT14 = "strIngredient14"
+        const val COLUMN_MEASURE14 = "strMeasure14"
+        const val COLUMN_INGREDIENT15 = "strIngredient15"
+        const val COLUMN_MEASURE15 = "strMeasure15"
     }
 }

@@ -44,7 +44,11 @@ class FavoritesActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val coctelesFavoritos = FavoritesRepository.getFavoriteDrinks(this)
+            .map { Drink(it.idDrink ?: "", it.strDrink ?: "", it.strDrinkThumb ?: "") }
+
         val coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+
+
         Log.i("Favorites", "Favorites: $coctelesFavoritos")
         adapter = CocktailAdapter(coctelesFavoritos,coctelesFavoritosById) { position ->
 

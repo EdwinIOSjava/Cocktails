@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.proytectmine.R
 import com.example.proytectmine.data.CocktailService
-import com.example.proytectmine.data.Drink
+import com.example.proytectmine.data.DrinkFull
 import com.example.proytectmine.data.FavoritesDAO
 import com.example.proytectmine.databinding.ActivityDetailBinding
 import com.squareup.picasso.Picasso
@@ -28,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     lateinit var binding: ActivityDetailBinding
-    lateinit var drink: Drink// creamos esta variable para recibir la respuesta de la API
+    lateinit var drink: DrinkFull// creamos esta variable para recibir la respuesta de la API
 
     var isFavorite = false
     lateinit var favoriteMenu: MenuItem
@@ -64,12 +64,12 @@ class DetailActivity : AppCompatActivity() {
     fun loadData() {
         Picasso.get().load(drink.strDrinkThumb).into(binding.coctelImageView)
         binding.cocktailNameTextView.text = drink.strDrink
-        //binding.ingredientsTextView.text = drink.strIngredient1 + ", " + drink.strIngredient2 + ", " + drink.strIngredient3 + ", " + drink.strIngredient4 + ", " + drink.strIngredient5
-//        binding.ingredientsTextView.text = drink.getIngredientsWithMeasures().joinToString("\n")
-//        binding.instruccionsTextView.text = drink.strInstructionsES
+        binding.ingredientsTextView.text = drink.strIngredient1 + ", " + drink.strIngredient2 + ", " + drink.strIngredient3 + ", " + drink.strIngredient4 + ", " + drink.strIngredient5
+        binding.ingredientsTextView.text = drink.getIngredientsWithMeasures().joinToString("\n")
+        binding.instruccionsTextView.text = drink.strInstructionsES
 
         // Consultamos la base de datos para saber si es favorito, si no lo es lo añadimos
-        isFavorite = favoritesDAO.findById(drink.idDrink) != null
+        isFavorite = favoritesDAO.findById(drink.idDrink!!) != null
         setFavoriteIcon()//Establecemos el icono correcto
     }
 
@@ -89,7 +89,7 @@ class DetailActivity : AppCompatActivity() {
                 val result = service.findCocktailById(id)
                 drink= result.drinks!!.get(0)
 
-                Log.i("nombre del COctail", "Nombre del Drink: ${drink.strDrink}")
+                Log.i("nombre del Coctail", "Nombre del Drink: ${drink.strDrink}")
 
                 CoroutineScope(Dispatchers.Main).launch {
                     loadData()

@@ -27,12 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: CocktailAdapter
     lateinit var binding: ActivityMainBinding
-    var coctelesFavoritos: List<Drink> = listOf()
-    lateinit var coctelesFavoritosById : List<String>
-
-
 
     var allsCocktailsByFirstLetter : List<Drink> = listOf()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 //        searchCocktailsIngredients("553")
 
         val coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+
         adapter = CocktailAdapter(allsCocktailsByFirstLetter,coctelesFavoritosById) { position ->
 
             val cocktail = allsCocktailsByFirstLetter[position]
@@ -68,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        searchAllsCocktailsByFirstLetter("m")
+        searchAllsCocktailsByFirstLetter("s")
 
         //accedemos a los listener de los botones
         initListeners()
@@ -157,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        var coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        val coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
         adapter.updateData(coctelesFavoritosById)
     }
 
