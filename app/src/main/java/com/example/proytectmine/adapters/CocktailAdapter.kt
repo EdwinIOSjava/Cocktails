@@ -31,6 +31,10 @@ class CocktailAdapter(
         holder.render(cocktail, favoritosListByIds)
         holder.itemView.setOnClickListener { onClick(position) }
     }
+    fun updateData(newData: List<String>) {
+        favoritosListByIds = newData
+        notifyDataSetChanged()
+    }
 
 }
 

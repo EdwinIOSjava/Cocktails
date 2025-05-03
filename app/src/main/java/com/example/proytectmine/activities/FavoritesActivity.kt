@@ -72,6 +72,7 @@ class FavoritesActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        adapter.notifyDataSetChanged()
+        var coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        adapter.updateData(coctelesFavoritosById)
     }
 }

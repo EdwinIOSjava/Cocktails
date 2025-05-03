@@ -188,7 +188,8 @@ class SearchCocktailActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        adapter.notifyDataSetChanged()
+        var coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        adapter.updateData(coctelesFavoritosById)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

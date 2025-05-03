@@ -227,5 +227,10 @@ class IngredientActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+    override fun onResume() {
+        super.onResume()
+        var coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        adapter.updateData(coctelesFavoritosById)
+    }
 
 }

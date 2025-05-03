@@ -12,8 +12,8 @@ object FavoritesRepository {
     }
 
     // Función para obtener solo los IDs de los cocteles favoritos
-    fun getFavoriteDrinkIds(context: Context): List<String> {
-        return getFavoriteDrinks(context).map { it.idDrink }
+    fun getFavoriteDrinkIds(context: Context): MutableList<String> {
+        return getFavoriteDrinks(context).map { it.idDrink }.toMutableList()
     }
 
 }

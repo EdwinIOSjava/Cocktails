@@ -14,6 +14,7 @@ import com.example.proytectmine.activities.DetailActivity.Companion.EXTRA_HOROSC
 import com.example.proytectmine.adapters.CocktailAdapter
 import com.example.proytectmine.data.CocktailService
 import com.example.proytectmine.data.Drink
+import com.example.proytectmine.data.FavoritesDAO
 import com.example.proytectmine.databinding.ActivityMainBinding
 import com.example.proytectmine.src.FavoritesRepository
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: CocktailAdapter
     lateinit var binding: ActivityMainBinding
+    var coctelesFavoritos: List<Drink> = listOf()
+    lateinit var coctelesFavoritosById : List<String>
 
 
 
@@ -154,7 +157,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        adapter.notifyDataSetChanged()
+        var coctelesFavoritosById = FavoritesRepository.getFavoriteDrinkIds(this)
+        adapter.updateData(coctelesFavoritosById)
     }
 
 }
